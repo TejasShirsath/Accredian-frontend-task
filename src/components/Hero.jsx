@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaMoneyBillWave, FaMoneyBill, FaCoins, FaDollarSign, FaGift, FaTrophy, FaMedal, FaStar } from 'react-icons/fa';
+import { FaMoneyBillWave, FaGift } from 'react-icons/fa';
 import appImage from '../assets/Accredian-image.jpg';
+import ReferralModal from './ReferralModal';
 
 function Hero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const icons = [
     { Icon: FaMoneyBillWave, size: 30, color: "text-green-300/40" },
     { Icon: FaGift, size: 30, color: "text-green-300/40" }
@@ -68,14 +70,62 @@ function Hero() {
             <p className="text-xl md:text-2xl text-gray-600 max-w-xl">
               Refer friends and earn up to ₹15,000! Join our community and start earning today.
             </p>
+            {/* Refer Button */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              onClick={() => setIsModalOpen(true)}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-10 py-4 
-                       rounded-full text-lg font-semibold hover:shadow-xl transition-all 
-                       duration-300 shadow-lg hover:from-blue-700 hover:to-blue-600"
+              className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-500 
+                        text-white px-12 py-5 rounded-full text-xl font-semibold
+                        shadow-[0_0_20px_rgba(66,153,225,0.5)] hover:shadow-[0_0_25px_rgba(66,153,225,0.8)]
+                        group flex items-center justify-center gap-4 transition-all duration-300
+                        before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent 
+                        before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full
+                        before:transition-transform before:duration-700 before:pointer-events-none"
             >
-              Refer Now
+              <span className="relative inline-flex items-center gap-2">
+                Refer Now
+                <motion.span
+                  initial={{ rotate: 0, scale: 1 }}
+                  animate={{ rotate: [0, -15, 15, 0], scale: [1, 1.2, 1.2, 1] }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    repeatDelay: 1,
+                    ease: "easeInOut"
+                  }}
+                  className="inline-block"
+                >
+                  <FaGift size={22} className="filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
+                </motion.span>
+              </span>
+
+              {/* Particle effects on hover */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(2)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={['', { opacity: [0, 1, 0], scale: [0.8, 1.2, 0.8], y: [-20, -40] }]}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      delay: i * 0.2,
+                      repeatDelay: 1
+                    }}
+                    className="absolute w-2 h-2 bg-white/30 rounded-full"
+                    style={{
+                      right: `${20 + i * 12}%`,
+                      top: '50%'
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Glow effect */}
+              <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 
+                            transition-opacity duration-300 bg-gradient-to-r from-blue-400/0 
+                            via-blue-400/30 to-purple-500/0 blur-xl -z-10" />
             </motion.button>
           </motion.div>
 
@@ -132,6 +182,12 @@ function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Add Modal */}
+      <ReferralModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
