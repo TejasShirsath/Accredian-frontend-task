@@ -1,10 +1,15 @@
 import './App.css';
-import Hero from './components/Hero';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Referral from './pages/referral';
 
 function App() {
   return (
     <div className="App">
-      <Hero />
+      <Router>
+        <Routes>
+          <Route path='/referral/:userID' element={<Referral/>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
