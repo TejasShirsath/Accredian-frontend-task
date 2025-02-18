@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaUser, FaEnvelope } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
+import { useParams } from "react-router-dom";
 
 const ReferralModal = ({ isOpen, onClose }) => {
+  const { userID } = useParams();
   const [formData, setFormData] = useState({
     referrerFirstName: '',
     referrerLastName: '',
@@ -17,13 +19,15 @@ const ReferralModal = ({ isOpen, onClose }) => {
     setLoading(true);
 
     try {
+      console.log(userID)
+      
       const response = await fetch('http://localhost:5000/api/referral', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userID: 'USR007', // You might want to pass this as a prop
+          userID,
           referrerName: `${formData.referrerFirstName} ${formData.referrerLastName}`,
           referrerEmail: formData.refereeEmail,
         }),
