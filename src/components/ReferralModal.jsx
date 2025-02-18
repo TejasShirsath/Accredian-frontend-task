@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaUser, FaEnvelope } from 'react-icons/fa';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ReferralModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -9,17 +10,73 @@ const ReferralModal = ({ isOpen, onClose }) => {
     refereeName: '',
     refereeEmail: '',
   });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    onClose();
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/referral', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userID: 'USR007', // You might want to pass this as a prop
+          referrerName: `${formData.referrerFirstName} ${formData.referrerLastName}`,
+          referrerEmail: formData.refereeEmail,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit referral');
+      }
+
+      const data = await response.json();
+      toast.success('Referral submitted successfully!', {
+        style: {
+          background: '#4CAF50',
+          color: '#fff',
+          padding: '16px',
+          borderRadius: '10px',
+        },
+        iconTheme: {
+          primary: '#fff',
+          secondary: '#4CAF50',
+        },
+        duration: 3000,
+      });
+      
+      setTimeout(() => {
+        onClose();
+      }, 1000);
+
+    } catch (error) {
+      console.error('Error submitting referral:', error);
+      toast.error('Failed to submit referral. Please try again.', {
+        style: {
+          background: '#F44336',
+          color: '#fff',
+          padding: '16px',
+          borderRadius: '10px',
+        },
+        iconTheme: {
+          primary: '#fff',
+          secondary: '#F44336',
+        },
+        duration: 3000,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-[9999]">
+          <Toaster position="top-center" reverseOrder={false} />
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -112,10 +169,11 @@ const ReferralModal = ({ isOpen, onClose }) => {
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white 
                           rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl 
-                          transition-shadow duration-300"
+                          transition-shadow duration-300 disabled:opacity-50"
                   type="submit"
+                  disabled={loading}
                 >
-                  Submit Referral
+                  {loading ? 'Submitting...' : 'Submit Referral'}
                 </motion.button>
               </form>
             </div>
