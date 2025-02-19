@@ -23,27 +23,27 @@ function Benefits({ activeTab, setActiveTab }) {
     ];
 
     return (
-        <div className="relative min-h-fit overflow-hidden bg-white pt-20">
+        <div className="relative min-h-fit overflow-hidden bg-white pt-16 sm:pt-20">
             <div className="absolute top-0 left-0 w-full">
                 <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
             </div>
 
-            <div className="container mx-auto px-6 md:px-12 py-8 md:py-8">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12 py-4 sm:py-8">
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-12"
+                    className="text-center mb-8 sm:mb-12"
                 >
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-3 sm:mb-4">
                         Program Benefits
                     </h1>
-                    <p className="text-xl text-gray-600">
+                    <p className="text-lg sm:text-xl text-gray-600">
                         Discover all the amazing rewards waiting for you
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     {benefits.map((benefit, index) => (
                         <motion.div
                             key={index}

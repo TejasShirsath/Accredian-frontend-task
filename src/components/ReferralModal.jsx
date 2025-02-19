@@ -114,7 +114,7 @@ const ReferralModal = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-[9999]">
+        <div className="fixed inset-0 flex items-center justify-center z-[9999] p-4 sm:p-0">
           <Toaster position="top-center" reverseOrder={false} />
           {/* Backdrop */}
           <motion.div
@@ -130,17 +130,17 @@ const ReferralModal = ({ isOpen, onClose }) => {
             initial={{ scale: 0.5, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.5, opacity: 0, y: 20 }}
-            className="relative w-11/12 max-w-md bg-white rounded-2xl shadow-2xl
+            className="relative w-full sm:w-11/12 max-w-md bg-white rounded-2xl shadow-2xl
                      max-h-[90vh] overflow-y-auto"
           >
             <button onClick={onClose} className="absolute right-4 top-4 text-gray-500 hover:text-gray-700">
               <FaTimes size={24} />
             </button>
 
-            <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Refer a Friend</h2>
+            <div className="p-4 sm:p-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">Refer a Friend</h2>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {/* Referrer Section */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-gray-700">Your Details</h3>

@@ -79,7 +79,8 @@ function Hero() {
   };
 
   return (
-    <div className="w-full h-auto bg-gradient-to-br from-green-50 via-white to-green-50 flex justify-center items-center px-[10%] py-[4%] relative">
+    <div className="w-full min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 
+                  flex justify-center items-center px-2 sm:px-4 md:px-[8%] py-2 sm:py-[4%] relative">
       {/* Floating Elements Container */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {floatingElements.map((_, index) => {
@@ -115,7 +116,7 @@ function Hero() {
       </div>
 
 
-      <div className="w-full h-[600px] rounded-3xl shadow-2xl overflow-hidden relative z-10 bg-white">
+      <div className="w-full h-[90vh] sm:h-[650px] md:h-[600px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden relative z-10 bg-white">
         {renderComponent()}
       </div>
     </div>
