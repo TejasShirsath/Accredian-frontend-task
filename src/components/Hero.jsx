@@ -81,8 +81,8 @@ function Hero() {
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 
                   flex justify-center items-center px-2 sm:px-4 md:px-[8%] py-2 sm:py-[4%] relative">
-      {/* Floating Elements Container */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Floating Elements Container - Hidden on small screens */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         {floatingElements.map((_, index) => {
           const randomIcon = icons[Math.floor(Math.random() * icons.length)];
           const position = getPosition(index);
