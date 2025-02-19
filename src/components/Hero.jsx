@@ -52,6 +52,13 @@ function Hero() {
           animateY: [0, Math.random() * 10 - 5, 0]
         };
         break;
+      default:
+        position = {
+          top: '0%',
+          left: '50%',
+          animateY: [-2, 8, -2],
+          animateX: [0, 0, 0]
+        };
     }
 
     return { ...position, side };
