@@ -14,31 +14,58 @@ const ReferralModal = ({ isOpen, onClose }) => {
   });
   const [loading, setLoading] = useState(false);
 
+  const validateForm = () => {
+    if (!formData.referrerFirstName.trim() || !formData.referrerLastName.trim()) {
+      toast.error('Please enter your full name');
+      return false;
+    }
+    if (!formData.refereeName.trim()) {
+      toast.error("Please enter your friend's name");
+      return false;
+    }
+    if (!formData.refereeEmail.trim()) {
+      toast.error("Please enter your friend's email");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.refereeEmail)) {
+      toast.error('Please enter a valid email address');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
 
     try {
-      console.log(userID)
-      
+      const requestData = {
+        referrerName: `${formData.referrerFirstName.trim()} ${formData.referrerLastName.trim()}`,
+        userID: userID,
+        referreeName: formData.refereeName.trim(),
+        referreeEmail: formData.refereeEmail.trim()  // Note: using 'referreeEmail' as per your API
+      };
+
       const response = await fetch('http://localhost:5000/api/referral', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          referrerName: `${formData.referrerFirstName} ${formData.referrerLastName}`,
-          userID,
-          refereeName: `${formData.refereeName}`,
-          refereeEmail: formData.refereeEmail
-        }),
+        body: JSON.stringify(requestData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to submit referral');
+        throw new Error(data.message || 'Failed to submit referral');
       }
 
-      const data = await response.json();
       toast.success('Referral submitted successfully!', {
         style: {
           background: '#4CAF50',
@@ -53,13 +80,20 @@ const ReferralModal = ({ isOpen, onClose }) => {
         duration: 3000,
       });
       
+      setFormData({
+        referrerFirstName: '',
+        referrerLastName: '',
+        refereeName: '',
+        refereeEmail: '',
+      });
+      
       setTimeout(() => {
         onClose();
       }, 1000);
 
     } catch (error) {
       console.error('Error submitting referral:', error);
-      toast.error('Failed to submit referral. Please try again.', {
+      toast.error(error.message || 'Failed to submit referral. Please try again.', {
         style: {
           background: '#F44336',
           color: '#fff',
