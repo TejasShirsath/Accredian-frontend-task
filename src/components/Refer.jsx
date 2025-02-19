@@ -3,14 +3,20 @@ import { motion } from 'framer-motion';
 import { FaGift } from 'react-icons/fa';
 import appImage from '../assets/Accredian-image.jpg';
 import ReferralModal from './ReferralModal';
+import Navigation from './Navigation';
 
-function Refer() {
+function Refer({ activeTab, setActiveTab }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="relative min-h-fit overflow-hidden bg-white py-8">
-            {/* Main Content with higher z-index */}
-            <div className="container mx-auto px-6 md:px-12 py-16 flex items-center max-w-7xl relative">
+        <div className="relative h-full overflow-hidden bg-white pt-20"> {/* Changed overflow-y-auto to overflow-hidden */}
+            {/* Navigation - Absolute positioned */}
+            <div className="absolute top-0 left-0 w-full">
+                <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+            </div>
+
+            {/* Main Content - adjusted padding */}
+            <div className="container mx-auto px-6 md:px-12 py-8 md:py-8 flex items-center max-w-7xl relative">
                 <div className="grid md:grid-cols-2 gap-10 items-center">
                     {/* Text Content */}
                     <motion.div
