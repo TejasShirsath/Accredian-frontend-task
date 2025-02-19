@@ -100,7 +100,7 @@ function Refer({ activeTab, setActiveTab }) {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="relative mt-4 sm:mt-8 md:mt-0"
                     >
-                        <div className="relative w-32 sm:w-56 md:w-64 h-[250px] sm:h-[400px] md:h-[450px] mx-auto">
+                        <div className="relative w-40 sm:w-56 md:w-64 h-[300px] sm:h-[400px] md:h-[450px] mx-auto">
                             {/* Background blur effect */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-200/30 to-purple-200/30 rounded-[1.5rem] sm:rounded-[3rem] 
                           blur-xl transform rotate-3 scale-105"></div>
@@ -120,7 +120,7 @@ function Refer({ activeTab, setActiveTab }) {
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
-                                className="relative backdrop-blur-sm bg-[#f8f4f4]/80 rounded-[1.25rem] sm:rounded-[2rem] p-2 sm:p-4 h-full 
+                                className="relative backdrop-blur-sm bg-[#f8f4f4]/80 rounded-[1.25rem] sm:rounded-[2rem] p-3 sm:p-4 h-full 
                         shadow-[0_0_20px_rgba(0,0,0,0.1)] border border-white/20"
                             >
                                 {/* Phone content */}
