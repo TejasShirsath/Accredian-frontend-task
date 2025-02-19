@@ -49,10 +49,10 @@ const ReferralModal = ({ isOpen, onClose }) => {
         referrerName: `${formData.referrerFirstName.trim()} ${formData.referrerLastName.trim()}`,
         userID: userID,
         referreeName: formData.refereeName.trim(),
-        referreeEmail: formData.refereeEmail.trim()  // Note: using 'referreeEmail' as per your API
+        referreeEmail: formData.refereeEmail.trim()
       };
 
-      const response = await fetch('http://localhost:5000/api/referral', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/referral`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

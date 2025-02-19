@@ -9,13 +9,13 @@ function Support({ activeTab, setActiveTab }) {
             icon: <FaEnvelope className="text-blue-500 text-2xl" />,
             title: "Email Support",
             description: "Get help via email within 24 hours",
-            action: <a href="mailto:support@example.com" className="text-blue-600 font-medium hover:text-blue-700">support@example.com</a>
+            action: <a href={`mailto:${process.env.REACT_APP_SUPPORT_EMAIL}`} className="text-blue-600 font-medium hover:text-blue-700">{process.env.REACT_APP_SUPPORT_EMAIL}</a>
         },
         {
             icon: <FaPhone className="text-green-500 text-2xl" />,
             title: "Phone Support",
             description: "Talk to our support team",
-            action: <a href="tel:+15551234567" className="text-blue-600 font-medium hover:text-blue-700">+1 (555) 123-4567</a>
+            action: <a href={`tel:${process.env.REACT_APP_SUPPORT_PHONE}`} className="text-blue-600 font-medium hover:text-blue-700">{process.env.REACT_APP_SUPPORT_PHONE}</a>
         },
         {
             icon: <FaComments className="text-purple-500 text-2xl" />,

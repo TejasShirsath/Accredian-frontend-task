@@ -32,7 +32,7 @@ function Refer({ activeTab, setActiveTab }) {
                             </span> for Referring!
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-600 max-w-xl">
-                            Refer friends and earn up to ₹15,000! Join our community and start earning today.
+                            Refer friends and earn up to ₹{process.env.REACT_APP_MAX_REFERRAL_REWARD.toLocaleString()}! Join our community and start earning today.
                         </p>
                         {/* Refer Button */}
                         <motion.button
