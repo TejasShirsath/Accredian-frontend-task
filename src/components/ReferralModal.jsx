@@ -27,9 +27,10 @@ const ReferralModal = ({ isOpen, onClose }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userID,
           referrerName: `${formData.referrerFirstName} ${formData.referrerLastName}`,
-          referrerEmail: formData.refereeEmail,
+          userID,
+          refereeName: `${formData.refereeName}`,
+          refereeEmail: formData.refereeEmail
         }),
       });
 
