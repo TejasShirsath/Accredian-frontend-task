@@ -93,20 +93,20 @@ function Refer({ activeTab, setActiveTab }) {
                         </motion.button>
                     </motion.div>
 
-                    {/* Image/Phone Mockup */}
+                    {/* Image/Phone Mockup - Removed hidden class and adjusted sizes */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative mt-4 sm:mt-8 md:mt-0 hidden sm:block"
+                        className="relative mt-4 sm:mt-8 md:mt-0"
                     >
-                        <div className="relative w-40 sm:w-56 md:w-64 h-[300px] sm:h-[400px] md:h-[450px] mx-auto">
+                        <div className="relative w-32 sm:w-56 md:w-64 h-[250px] sm:h-[400px] md:h-[450px] mx-auto">
                             {/* Background blur effect */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-200/30 to-purple-200/30 rounded-[3rem] 
+                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-200/30 to-purple-200/30 rounded-[1.5rem] sm:rounded-[3rem] 
                           blur-xl transform rotate-3 scale-105"></div>
 
                             {/* Phone shadow */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-blue-50 rounded-[3rem] 
+                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-blue-50 rounded-[1.5rem] sm:rounded-[3rem] 
                           transform rotate-3 shadow-[0_0_40px_rgba(59,130,246,0.2)]"></div>
 
                             {/* Phone frame */}
@@ -120,11 +120,11 @@ function Refer({ activeTab, setActiveTab }) {
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
-                                className="relative backdrop-blur-sm bg-[#f8f4f4]/80 rounded-[2rem] p-4 h-full 
+                                className="relative backdrop-blur-sm bg-[#f8f4f4]/80 rounded-[1.25rem] sm:rounded-[2rem] p-2 sm:p-4 h-full 
                         shadow-[0_0_20px_rgba(0,0,0,0.1)] border border-white/20"
                             >
                                 {/* Phone content */}
-                                <div className="relative h-full rounded-2xl overflow-hidden 
+                                <div className="relative h-full rounded-lg sm:rounded-2xl overflow-hidden 
                            shadow-inner ring-1 ring-black/5">
                                     <img
                                         src={appImage}
@@ -139,7 +139,7 @@ function Refer({ activeTab, setActiveTab }) {
                                 </div>
 
                                 {/* Phone camera notch */}
-                                <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-20 h-1.5 
+                                <div className="absolute top-3 sm:top-6 left-1/2 transform -translate-x-1/2 w-12 sm:w-20 h-1 sm:h-1.5 
                             bg-slate-800/10 rounded-full backdrop-blur-sm"></div>
                             </motion.div>
                         </div>
